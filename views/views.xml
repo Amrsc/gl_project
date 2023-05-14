@@ -1,0 +1,48 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="snop.list">
+      <field name="name">snop list</field>
+      <field name="model">snop.snop</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="snop.action_window">
+      <field name="name">snop window</field>
+      <field name="res_model">snop.snop</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.server" id="snop.action_server">
+      <field name="name">snop server</field>
+      <field name="model_id" ref="model_snop_snop"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+
+    <menuitem name="snop" id="snop.menu_root"/>
+
+    <menuitem name="Plan de production" id="snop.menu_1" parent="snop.menu_root" action="snop.action_server"/>
+    <menuitem name="Plan de charge" id="snop.menu_2" parent="snop.menu_root" action="snop.action_window"/>
+    <menuitem name="Gestion des stocks" id="snop.menu_3" parent="snop.menu_root" action="snop.action_window"/>
+    <menuitem name="A commander" id="snop.menu_4" parent="snop.menu_root" action="snop.action_window"/>
+<!--
+    <menuitem name="List" id="snop.menu_1_list" parent="snop.menu_1"
+              action="snop.action_window"/>
+    <menuitem name="Server to list" id="snop" parent="snop.menu_2"
+              action="snop.action_server"/>
+-->
+  </data>
+</odoo>
